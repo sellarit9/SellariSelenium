@@ -40,5 +40,7 @@ public class AppTest
     	ChromeDriverManager.getInstance().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
+        
+        //stuff here
     }
 }
