@@ -42,5 +42,7 @@ public class AppTest
         driver.manage().window().maximize();
         
         //stuff here
+        
+        //more stuff!!
     }
 }
