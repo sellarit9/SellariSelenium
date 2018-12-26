@@ -45,12 +45,31 @@ public class AppTest
         
         driver.get("https://www.nhl.com/stars");
         
-        driver.findElement(By.xpath("//*[@id=\"team-landing_index\"]/div[2]/div[3]/div[2]/div/nav[2]/ul/li[7]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"team-landing_index\"]/div[2]/div[3]/div[2]/div/nav[2]/ul/li[5]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"team-landing_index\"]/div[2]/div[3]/div[2]/div/nav[2]/ul/li[5]/a")).click();
         
-        driver.findElement(By.xpath("//*[@id=\"stats_index\"]/div[1]/div[3]/div[2]/div/nav[2]/ul/li[5]/a")).click();
-        
-        driver.findElement(By.xpath("//a[@href='/player/tyler-seguin-8475794']")).click();
-        
+        driver.get("https://www.nhl.com/player/tyler-seguin-8475794");
+       
+        try
+        {
+
+        	String info = driver.findElement(By.xpath("//*[@id=\"content-wrap\"]/section[1]/div/section/h3")).getText();
+        	
+        	if(info.contains("Seguin") && info.contains("#92"))
+			{
+				assertTrue(true);
+			}
+			else
+			{
+				assertTrue(false);
+			}
+        	
+        }
+        catch(Exception e)
+        {
+        	assertTrue(false);
+        }
+       
         
         //driver.close();
         
