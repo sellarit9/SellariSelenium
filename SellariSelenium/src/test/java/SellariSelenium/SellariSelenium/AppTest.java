@@ -4,10 +4,16 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +28,10 @@ public class AppTest
 {
 	
 	private final Logger slf4jLogger = LoggerFactory.getLogger(AppTest.class);
+	
+	private static RemoteWebDriver driver;
+	
+	static DesiredCapabilities capabilities = DesiredCapabilities.chrome();
     /**
      * Create the test case
      *
@@ -42,15 +52,28 @@ public class AppTest
 
     /**
      * Rigourous Test :-)
+     * @throws MalformedURLException 
      */
-    public void testApp()
+    public void testApp() throws MalformedURLException
     {
-    	ChromeDriverManager.getInstance().setup();
+        capabilities.setVersion("latest");
+        capabilities.setCapability("platform", "Windows 8.1");
+        capabilities.setCapability("testName","SellariSelenium - Dallas Stars Test");
+        capabilities.setCapability("SRF_CLIENT_ID", "t919707050_oauth2-Fd7wTPr231LHXVTmTEAR@microfocus.com"); 
+        capabilities.setCapability("SRF_CLIENT_SECRET", "Sf0FsXCA8UuLKEvVULbd");
+        capabilities.setCapability("resolution", "1920x1080");
+    	
+    	
+    	/*ChromeDriverManager.getInstance().setup();
     	ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
         options.addArguments("window-size=1200x600");    	
         WebDriver driver = new ChromeDriver(options);
-        //driver.manage().window().maximize();
+        //driver.manage().window().maximize();*/
+        
+        driver = new RemoteWebDriver(
+        	      new URL("https://ftaas.saas.hpe.com/wd/hub/"), capabilities);
+        	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         
         slf4jLogger.info("Navigating to Dallas Stars Website");
         driver.get("https://www.nhl.com/stars");
