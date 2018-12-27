@@ -55,7 +55,7 @@ public class AppTest
 
         	String info = driver.findElement(By.xpath("//*[@id=\"content-wrap\"]/section[1]/div/section/h3")).getText();
         	
-        	if(info.contains("Seguin") && info.contains("#91"))
+        	if(info.contains("Seguin") && info.contains("#92"))
 			{
 				assertTrue(true);
 			}
@@ -71,7 +71,7 @@ public class AppTest
         }
        
         
-        //driver.close();
+        driver.close();
         
 
     }
